@@ -39,6 +39,17 @@ cosim([1, 1, 2], [2, 1, 3])
 # metric is a string specifying either "euclidean" or "cosim".  
 # All hyper-parameters should be hard-coded in the algorithm.
 def knn(train,query,metric):
+    # Locate the most similar neighbors
+    def get_neighbors(train, test_row, num_neighbors):
+        distances = list()
+        for train_row in train:
+            dist = euclidean(test_row, train_row)
+            distances.append((train_row, dist))
+        distances.sort(key=lambda tup: tup[1])
+        neighbors = list()
+        for i in range(num_neighbors):
+            neighbors.append(distances[i][0])
+        return neighbors
     return(labels)
 
 # returns a list of labels for the query dataset based upon observations in the train dataset. 
